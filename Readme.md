@@ -30,9 +30,21 @@ An oh-my-zsh plugin to switch between different maven configurations. This could
 
   ```shell
   # select a maven profile
+  $ mvnp-set-profile custom
+  # or
   $ export MAVEN_PROFILE=custom
+  # restore default profile
+  # mvnp-set-profile default
+  
   # start to use maven
   $ mvn test
+  ```
+
+  - Override default profile
+  
+  ```shell
+  # add this line to ~/.zshrc
+  MAVEN_PROFILE_DEFAULT_OVERRIDE="target-profile-name"
   ```
 
 5. Recommandation
