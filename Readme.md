@@ -29,12 +29,12 @@ An oh-my-zsh plugin to switch between different maven configurations. This could
 5. Usage
 
   ```shell
-  # select a maven profile
-  $ mvnp-set-profile custom
+  # switch to a maven profile
+  $ mvnp-switch custom
   # or
   $ export MAVEN_PROFILE=custom
   # restore default profile
-  # mvnp-set-profile default
+  # mvnp-switch default
   
   # start to use maven
   $ mvn test
