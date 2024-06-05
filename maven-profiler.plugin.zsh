@@ -43,7 +43,7 @@ _mvnp_load_env() {
       _mvnp_show_profile
       return 1
     fi
-    MAVEN_PROFILE=$TARGET_MAVEN_PROFILE
+    export MAVEN_PROFILE=$TARGET_MAVEN_PROFILE
     _mvnp_show_profile
   }
 
