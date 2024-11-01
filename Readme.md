@@ -24,7 +24,7 @@ An oh-my-zsh plugin to switch between different maven configurations. This could
 
   - Default maven configuration file is `$MAVEN_HOME/conf/settings.xml`
   - Copy default maven configuration file and rename it to `$MAVEN_HOME/conf/settings-custom.xml`, in this case, `custom` is the profile name
-  - Optional, if a configuration file need to be set as default, add `MAVEN_PROFILE_DEFAULT_OVERRIDE=$TARGET_FILE` in `~/.zshrc`
+  - Optional, if a configuration file need to be set as default, add `export MAVEN_PROFILE=$TARGET_FILE` in `~/.zshrc`
 
 5. Usage
 
@@ -44,9 +44,10 @@ An oh-my-zsh plugin to switch between different maven configurations. This could
   
   ```shell
   # add this line to ~/.zshrc
-  MAVEN_PROFILE_DEFAULT_OVERRIDE="target-profile-name"
+  export MAVEN_PROFILE="target-profile-name"
   ```
 
 5. Recommandation
   
   - Consider use this plugin with [direnv](https://direnv.net/) or other tools with automatic environment variable manipulate utilities. 
+
