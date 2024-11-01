@@ -10,10 +10,9 @@ _mvnp_load_env() {
   MAVEN_PROFILER_PROMPT_TITLE='MAVEN'
   MAVEN_PROFILER_DEFAULT_PROFILE='default'
 
-  if [[ -z "$MAVEN_PROFILE" ]]; then
-    # MAVEN_PROFILE_DEFAULT_OVERRIDE might not be loaded into shell at the loading period
-    export MAVEN_PROFILE=$MAVEN_PROFILE_DEFAULT_OVERRIDE
-  else
+  if [[ -n "$MAVEN_PROFILE" ]]; then
+    # clear MAVEN_PROFILE at the loading phase
+    # if MAVEN_PROFILE is not cleared in this phase, then MAVEN_PROFILE config could only be reset after re-login
     export MAVEN_PROFILE=''
   fi
 
@@ -73,21 +72,21 @@ _mvnp_load_env() {
     fi
   }
 
+  _mvnp_apply_default_profile() {
+    # validations
+    if [[ -z $MAVEN_PROFILE ]]; then
+      # apply default maven profile
+      export MAVEN_PROFILE=$MAVEN_PROFILER_DEFAULT_PROFILE
+    fi
+  }
+
   mvn-profiler() {
     local JDK_VERSION_OUTPUT MAVEN_EXECUTABLE
     MAVEN_EXECUTABLE=$MAVEN_HOME/bin/mvn
     MAVEN_CONFIG_FILE=$MAVEN_HOME/conf/settings-$MAVEN_PROFILE.xml
 
     # validations
-    if [[ -z $MAVEN_PROFILE ]]; then
-      if [[ -n $MAVEN_PROFILE_DEFAULT_OVERRIDE ]]; then
-        # if default maven profile is overrided, apply $MAVEN_PROFILE_DEFAULT_OVERRIDE automatically
-        export MAVEN_PROFILE=$MAVEN_PROFILE_DEFAULT_OVERRIDE
-      else
-        # apply default maven profile
-        export MAVEN_PROFILE=$MAVEN_PROFILER_DEFAULT_PROFILE
-      fi
-    fi
+    _mvnp_apply_default_profile
 
     MAVEN_CONFIG_FILE=$(_mvnp_assemble_config_file_path "$MAVEN_PROFILE")
 
@@ -119,6 +118,7 @@ _mvnp_load_env() {
   alias mvn=mvn-profiler
   alias mvnp=mvn-profiler
   alias mvnp-switch=_mvnp_switch_profile
+  alias mvnp-show=_mvnp_show_profile
 }
 
 _mvnp_load_env
