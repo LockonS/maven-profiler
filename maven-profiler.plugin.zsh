@@ -111,6 +111,9 @@ _mvnp_load_env() {
     sleep 1
 
     # execute mvn with designate config file and passed options
+    # only override user settings (-s), mirroring how IntelliJ IDEA's Maven
+    # integration works (it only exposes a "User settings file" option and
+    # always relies on Maven's default global settings.xml)
     "$MAVEN_EXECUTABLE" -s "$MAVEN_CONFIG_FILE" "$@"
   }
 
