@@ -185,4 +185,3 @@ mvn-profiler() {
   "$MAVEN_EXECUTABLE" -s "$MAVEN_CONFIG_FILE" "$@"
 }
 
-

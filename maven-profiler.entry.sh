@@ -40,4 +40,3 @@ source "$MVNP_CORE_FILE"
 
 mvn-profiler "$@"
 
-
